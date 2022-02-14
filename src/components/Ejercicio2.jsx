@@ -7,16 +7,23 @@ class Ejercicio2 extends React.Component {
     super(props);
     this.state = {
       selectedItem: '',
-      selectedBrand: '',
-      selectedTitle: '',
+      selectedBrand_Name: '',
+      selectedDevice_count: '',
       tableData: [],
     };
   }
 
+  changeSelected = (item) => {
+    this.setState({
+      selectedItem: item,
+      selectedBrand_Name: item.Brand,
+      selectedDevice_coun: item.Device_count,
+    });
+  };
+
   async componentDidMount() {
     const res = await axios.get(
-      'https://api-mobilespecs.azharimm.site/v2/brands',
-      'https://api-mobilespecs.azharimm.site/v2/brands/apple-phones-48?page=2'
+      'https://api-mobilespecs.azharimm.site/v2/brands'
     );
     this.setState({ coins: res.data });
   }
@@ -25,31 +32,32 @@ class Ejercicio2 extends React.Component {
     return (
       <CardGroup>
         <Card>
-          <Card.Img variant="top" src="holder.js/100px160" />
           <Card.Body>
             <Card.Title>Marca</Card.Title>
             <Card.Text>
-              This is a wider card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
+              {this.state.tableData.map((item) => {
+                return (
+                  <tr key={uuid()} onClick={() => this.changeSelected(item)}>
+                    <td>{item.selectedBrand_Name}</td>
+                  </tr>
+                );
+              })}
             </Card.Text>
           </Card.Body>
-          <Card.Footer>
-            <small className="text-muted">Last updated 3 mins ago</small>
-          </Card.Footer>
         </Card>
         <Card>
-          <Card.Img variant="top" src="holder.js/100px160" />
           <Card.Body>
             <Card.Title>Modelo</Card.Title>
             <Card.Text>
-              This card has supporting text below as a natural lead-in to
-              additional content.{' '}
+              {this.state.tableData.map((item) => {
+                return (
+                  <tr key={uuid()} onClick={() => this.changeSelected(item)}>
+                    <td>{item.founded}</td>
+                  </tr>
+                );
+              })}
             </Card.Text>
           </Card.Body>
-          <Card.Footer>
-            <small className="text-muted">Last updated 3 mins ago</small>
-          </Card.Footer>
         </Card>
       </CardGroup>
     );
