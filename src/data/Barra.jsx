@@ -3,7 +3,7 @@ import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import uuid from 'react-uuid';
 
-import { MenuElements } from '../data/MenuElements';
+import { PaginasApp } from '../data/PaginasApp';
 
 class Barra extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class Barra extends React.Component {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                {MenuElements.map((item) => {
+                {PaginasApp.map((item) => {
                   return (
                     <Nav.Link key={uuid()} as={Link} to={item.path}>
                       {item.title}
