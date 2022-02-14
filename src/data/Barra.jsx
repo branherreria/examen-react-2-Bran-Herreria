@@ -13,9 +13,15 @@ class Barra extends React.Component {
   render() {
     return (
       <div>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="xl" bg="light" variant="light">
           <Container>
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Navbar.Brand href="#home">
+              <img
+                className="logo-image"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/50px-React.svg.png"
+              />
+              Menu
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="justify-content-end flex-grow-1 pe-3">
