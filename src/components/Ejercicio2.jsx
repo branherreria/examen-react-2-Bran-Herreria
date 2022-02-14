@@ -1,46 +1,57 @@
 import React from 'react';
+import axios from 'axios';
+import { Card, CardGroup } from 'react-bootstrap';
 
 class Ejercicio2 extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedItem: '',
+      selectedBrand: '',
+      selectedTitle: '',
+      tableData: [],
+    };
+  }
+
+  async componentDidMount() {
+    const res = await axios.get(
+      'https://api-mobilespecs.azharimm.site/v2/brands',
+      'https://api-mobilespecs.azharimm.site/v2/brands/apple-phones-48?page=2'
+    );
+    this.setState({ coins: res.data });
   }
 
   render() {
     return (
-      <div id="ej2">
-      <h2>Ejercicio 2</h2>
-      <ul>
-        <li>
-          Utiliza la API REST de{' '}
-          <a href="https://github.com/azharimm/phone-specs-api">Phone Specifications API</a>{' '}
-          para rellenar una tabla con datos de teléfonos mediante un formulario. Ten en cuenta las siguientes indicaciones:
-        </li>
-        <li>El formulario será un componente que a su vez estará formado por dos componentes <b>(1 punto)</b>:</li>
-          <ul>
-            <li>Lista desplegable con marcas de teléfono, la cual se ha de rellenar llamando a la API (List Brands)</li>
-            <li>Botón de búsqueda, que rellenará la tabla llamando a la API (List Phones) con el parámetro indicado en la lista desplegable</li>
-          </ul>
-        <li>La tabla tendrá los campos Marca y Modelo, y al cargar la página se rellenará con los datos de los últimos modelos (Top by Fans)<b> - 1,5 puntos</b></li>
-        <li>Al hacer click sobre una fila de la tabla, se mostrará en un elemento de tipo <a href="https://react-bootstrap.github.io/components/cards/">
-            Card
-          </a>{' '}
-          de React-Bootstrap con el detalle del modelo en concreto, con los siguientes campos separados al estilo "Kitchen Sink"<b> (1,5 puntos)</b>:
-          <ul>
-            <li>Imagen</li>
-            <li>Marca - Modelo</li>
-            <li>Sistema operativo</li>
-            <li>Dimensión</li>
-            <li>Almacenamiento</li>
-          </ul>
-          Salvo la imagen, para recuperar el resto de elementos tenéis que llamar a la API (Phone Specifications) usando el campo <i>detail</i> o <i>slug</i> 
-          de las consultas de listado de elementos
-          </li>
-        <li>
-          Añade un botón al Card que permita añadir un teléfono a una lista de favoritos, de modo que almacene su información en localStorage al ir a otra página<b> - 1 punto</b>
-        </li>
-      </ul>
-    </div>
-     
+      <CardGroup>
+        <Card>
+          <Card.Img variant="top" src="holder.js/100px160" />
+          <Card.Body>
+            <Card.Title>Marca</Card.Title>
+            <Card.Text>
+              This is a wider card with supporting text below as a natural
+              lead-in to additional content. This content is a little bit
+              longer.
+            </Card.Text>
+          </Card.Body>
+          <Card.Footer>
+            <small className="text-muted">Last updated 3 mins ago</small>
+          </Card.Footer>
+        </Card>
+        <Card>
+          <Card.Img variant="top" src="holder.js/100px160" />
+          <Card.Body>
+            <Card.Title>Modelo</Card.Title>
+            <Card.Text>
+              This card has supporting text below as a natural lead-in to
+              additional content.{' '}
+            </Card.Text>
+          </Card.Body>
+          <Card.Footer>
+            <small className="text-muted">Last updated 3 mins ago</small>
+          </Card.Footer>
+        </Card>
+      </CardGroup>
     );
   }
 }
